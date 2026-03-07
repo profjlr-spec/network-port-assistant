@@ -1,23 +1,26 @@
 # Network Port Assistant
 
-Network Port Assistant is a Python-based network discovery tool designed to help identify devices connected to a local network.
-
-The tool automatically detects the active network interface, scans the network for active hosts, identifies device vendors using MAC addresses, and performs a basic port scan using Nmap.
-
-This project is intended as a learning tool for networking, cybersecurity, and automation using Python and Linux.
-
----
+Simple Linux network diagnostic tool written in Python.
 
 ## Features
 
-- Automatic network detection
-- ARP-based device discovery
-- MAC address vendor identification
-- Hostname resolution
-- Fast port scanning using Nmap
-- JSON export of scan results
-- Works on Linux environments
+- Detect active network interface
+- Show IP address
+- Show MAC address
+- Show gateway
+- Show DNS servers
+- Show link status
+- Show speed and duplex when available
 
----
+## Requirements
 
-## Example Output
+- Python 3
+- ethtool
+
+Install dependencies:
+
+sudo apt install ethtool
+
+## Run
+
+python port_info.py
