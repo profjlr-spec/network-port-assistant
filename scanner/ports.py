@@ -37,6 +37,7 @@ def scan_ports(ip, ports_to_scan):
                 open_ports.append(result)
 
     print(" " * 60, end="\r")
+    print("", end="")
     open_ports.sort()
     return open_ports
 
@@ -81,8 +82,7 @@ def grab_banner(ip, port):
                 response = sock.recv(1024).decode(errors="ignore").strip()
 
                 if response:
-                    first_line = response.splitlines()[0]
-                    return first_line
+                    return response.splitlines()[0]
 
         elif port == 443:
             context = ssl.create_default_context()
@@ -96,8 +96,7 @@ def grab_banner(ip, port):
                     response = ssock.recv(1024).decode(errors="ignore").strip()
 
                     if response:
-                        first_line = response.splitlines()[0]
-                        return first_line
+                        return response.splitlines()[0]
 
                     return "TLS service detected"
 
@@ -112,8 +111,7 @@ def grab_banner(ip, port):
                 try:
                     banner = sock.recv(1024).decode(errors="ignore").strip()
                     if banner:
-                        first_line = banner.splitlines()[0]
-                        return first_line
+                        return banner.splitlines()[0]
                 except Exception:
                     pass
 

@@ -35,7 +35,7 @@ def save_json_results(interface_info, hosts):
         "hosts": hosts
     }
 
-    with open("scan_results.json", "w") as file:
+    with open("scan_results.json", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4)
 
     print("Saved: scan_results.json")
@@ -51,7 +51,8 @@ def save_csv_results(hosts):
             "mac",
             "vendor",
             "os",
-            "open_ports"
+            "open_ports",
+            "banners"
         ])
 
         for host in hosts:
@@ -60,13 +61,20 @@ def save_csv_results(hosts):
                 for port_info in host["ports"]
             )
 
+            banners = "; ".join(
+                f"{port_info['port']} {port_info['banner']}"
+                for port_info in host["ports"]
+                if port_info.get("banner")
+            )
+
             writer.writerow([
                 str(host.get("ip", "")),
                 str(host.get("hostname", "")),
                 str(host.get("mac", "")),
                 str(host.get("vendor", "")),
                 str(host.get("os", "")),
-                open_ports
+                open_ports,
+                banners
             ])
 
     print("Saved: scan_results.csv")
