@@ -30,14 +30,15 @@ def scan_ports(ip, ports_to_scan):
 
         for future in as_completed(futures):
             checked += 1
-            print(f"  Port scan progress: {checked}/{total_ports}", end="\r")
+            print(f"\r  Port scan progress: {checked}/{total_ports}", end="")
 
             result = future.result()
             if result:
                 open_ports.append(result)
 
-    print(" " * 60, end="\r")
-    print("", end="")
+    # limpia la línea de progreso completamente
+    print("\r" + " " * 80 + "\r", end="")
+
     open_ports.sort()
     return open_ports
 
