@@ -36,6 +36,16 @@ def print_host_separator():
     print("=" * 40)
 
 
+def print_summary(total_hosts, hosts_with_open_ports, save_enabled):
+    print("\nScan Summary")
+    print("-" * 20)
+    print(f"Active hosts found      : {total_hosts}")
+    print(f"Hosts with open ports   : {hosts_with_open_ports}")
+
+    if save_enabled:
+        print("Results saved           : scan_results.json, scan_results.csv")
+
+
 def main():
     args = parse_args()
 
@@ -66,6 +76,7 @@ def main():
         return
 
     results = []
+    hosts_with_open_ports = 0
 
     print("\nDiscovered Hosts:\n")
 
@@ -80,7 +91,7 @@ def main():
             print(f"Error: {error}")
             return
 
-        print(f"Ports selected for scanning: {len(ports_to_scan)} ports")
+        print(f"Ports selected for scanning: {len(ports_to_scan)} ports\n")
 
     for host in hosts:
         hostname = get_hostname(host)
@@ -105,8 +116,9 @@ def main():
         if ports:
             open_ports = scan_ports(host, ports_to_scan)
 
+            print("Open Ports:")
             if open_ports:
-                print("Open Ports:")
+                hosts_with_open_ports += 1
                 for port in open_ports:
                     service = get_service(port)
                     print(f"  - {port:<5} {service}")
@@ -115,7 +127,6 @@ def main():
                         "service": service
                     })
             else:
-                print("Open Ports:")
                 print("  - None found")
 
         print_host_separator()
@@ -133,6 +144,12 @@ def main():
     if save:
         print("Saving results...\n")
         save_results(interface_info, results)
+
+    print_summary(
+        total_hosts=len(hosts),
+        hosts_with_open_ports=hosts_with_open_ports,
+        save_enabled=save
+    )
 
 
 if __name__ == "__main__":
