@@ -1,4 +1,5 @@
 import socket
+import ssl
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
@@ -35,7 +36,7 @@ def scan_ports(ip, ports_to_scan):
             if result:
                 open_ports.append(result)
 
-    print(" " * 50, end="\r")
+    print(" " * 60, end="\r")
     open_ports.sort()
     return open_ports
 
@@ -69,3 +70,54 @@ def get_ports_to_scan(use_top_ports=False, port_range=None):
         return TOP_PORTS
 
     return TOP_PORTS
+
+
+def grab_banner(ip, port):
+    try:
+        if port == 80:
+            with socket.create_connection((ip, port), timeout=2) as sock:
+                request = f"HEAD / HTTP/1.1\r\nHost: {ip}\r\nConnection: close\r\n\r\n"
+                sock.sendall(request.encode())
+                response = sock.recv(1024).decode(errors="ignore").strip()
+
+                if response:
+                    first_line = response.splitlines()[0]
+                    return first_line
+
+        elif port == 443:
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE
+
+            with socket.create_connection((ip, port), timeout=2) as sock:
+                with context.wrap_socket(sock, server_hostname=ip) as ssock:
+                    request = f"HEAD / HTTP/1.1\r\nHost: {ip}\r\nConnection: close\r\n\r\n"
+                    ssock.sendall(request.encode())
+                    response = ssock.recv(1024).decode(errors="ignore").strip()
+
+                    if response:
+                        first_line = response.splitlines()[0]
+                        return first_line
+
+                    return "TLS service detected"
+
+        elif port == 22:
+            with socket.create_connection((ip, port), timeout=2) as sock:
+                banner = sock.recv(1024).decode(errors="ignore").strip()
+                if banner:
+                    return banner
+
+        else:
+            with socket.create_connection((ip, port), timeout=2) as sock:
+                try:
+                    banner = sock.recv(1024).decode(errors="ignore").strip()
+                    if banner:
+                        first_line = banner.splitlines()[0]
+                        return first_line
+                except Exception:
+                    pass
+
+    except Exception:
+        return None
+
+    return None

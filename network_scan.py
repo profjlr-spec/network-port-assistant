@@ -8,7 +8,7 @@ from scanner.discovery import (
     get_vendor,
 )
 from scanner.interfaces import choose_interface, get_interface_info
-from scanner.ports import get_ports_to_scan, get_service, scan_ports
+from scanner.ports import grab_banner, get_ports_to_scan, get_service, scan_ports
 from scanner.utils import interactive_menu, save_results
 
 
@@ -121,10 +121,17 @@ def main():
                 hosts_with_open_ports += 1
                 for port in open_ports:
                     service = get_service(port)
-                    print(f"  - {port:<5} {service}")
+                    banner = grab_banner(host, port)
+
+                    if banner:
+                        print(f"  - {port:<5} {service} ({banner})")
+                    else:
+                        print(f"  - {port:<5} {service}")
+
                     port_data.append({
                         "port": port,
-                        "service": service
+                        "service": service,
+                        "banner": banner if banner else ""
                     })
             else:
                 print("  - None found")
