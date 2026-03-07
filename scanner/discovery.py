@@ -1,4 +1,5 @@
 import ipaddress
+import re
 import socket
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -74,3 +75,39 @@ def get_vendor(mac, local_mac):
 
     prefix = mac.upper()[0:8]
     return OUI_VENDORS.get(prefix, "Unknown Vendor")
+
+
+def get_ttl(ip):
+    try:
+        result = subprocess.run(
+            ["ping", "-c", "1", "-W", "1", ip],
+            capture_output=True,
+            text=True
+        )
+
+        output = result.stdout
+        match = re.search(r"ttl[=\s](\d+)", output, re.IGNORECASE)
+
+        if match:
+            return int(match.group(1))
+
+    except Exception:
+        pass
+
+    return None
+
+
+def detect_os(ip):
+    ttl = get_ttl(ip)
+
+    if ttl is None:
+        return "Unknown"
+
+    if ttl <= 64:
+        return "Linux / Router"
+    elif ttl <= 128:
+        return "Windows"
+    elif ttl <= 255:
+        return "Network Device / Router"
+
+    return "Unknown"

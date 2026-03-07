@@ -1,6 +1,12 @@
 import argparse
 
-from scanner.discovery import discover_hosts, get_hostname, get_mac, get_vendor
+from scanner.discovery import (
+    detect_os,
+    discover_hosts,
+    get_hostname,
+    get_mac,
+    get_vendor,
+)
 from scanner.interfaces import choose_interface, get_interface_info
 from scanner.ports import get_service, scan_ports
 from scanner.utils import interactive_menu, save_results
@@ -14,6 +20,10 @@ def parse_args():
     parser.add_argument("--save", action="store_true")
 
     return parser.parse_args()
+
+
+def print_host_separator():
+    print("=" * 40)
 
 
 def main():
@@ -33,13 +43,17 @@ def main():
         return
 
     print("\nInterface Information:")
-    print("Interface   :", interface_info["interface"])
-    print("IP Address  :", interface_info["ip_address"])
-    print("Netmask     :", interface_info["netmask"])
-    print("Network     :", interface_info["network"])
-    print("Local MAC   :", interface_info["mac_address"])
+    print(f"Interface   : {interface_info['interface']}")
+    print(f"IP Address  : {interface_info['ip_address']}")
+    print(f"Netmask     : {interface_info['netmask']}")
+    print(f"Network     : {interface_info['network']}")
+    print(f"Local MAC   : {interface_info['mac_address']}")
 
     hosts = discover_hosts(interface_info["network"])
+
+    if not hosts:
+        print("\nNo active hosts were found.")
+        return
 
     results = []
 
@@ -54,11 +68,14 @@ def main():
             mac = get_mac(host)
 
         vendor = get_vendor(mac, interface_info["mac_address"])
+        os_guess = detect_os(host)
 
-        print("Host:", host)
-        print("  Hostname:", hostname)
-        print("  MAC Address:", mac)
-        print("  Vendor:", vendor)
+        print_host_separator()
+        print(f"Host     : {host}")
+        print(f"Hostname : {hostname}")
+        print(f"MAC      : {mac}")
+        print(f"Vendor   : {vendor}")
+        print(f"OS       : {os_guess}")
 
         port_data = []
 
@@ -66,14 +83,19 @@ def main():
             open_ports = scan_ports(host)
 
             if open_ports:
-                print("  Open Ports:")
-                for p in open_ports:
-                    service = get_service(p)
-                    print("   ", p, service)
-                    port_data.append({"port": p, "service": service})
+                print("Open Ports:")
+                for port in open_ports:
+                    service = get_service(port)
+                    print(f"  - {port:<5} {service}")
+                    port_data.append({
+                        "port": port,
+                        "service": service
+                    })
             else:
-                print("  No common open ports found.")
+                print("Open Ports:")
+                print("  - None found")
 
+        print_host_separator()
         print()
 
         results.append({
@@ -81,10 +103,12 @@ def main():
             "hostname": hostname,
             "mac": mac,
             "vendor": vendor,
+            "os": os_guess,
             "ports": port_data
         })
 
     if save:
+        print("Saving results...\n")
         save_results(interface_info, results)
 
 
