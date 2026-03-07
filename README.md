@@ -1,24 +1,18 @@
-# Network Port Assistant
+## Network Port Assistant
 
-Python network reconnaissance tool for host discovery, MAC address detection, vendor lookup, hostname resolution, and common port scanning.
+Python network reconnaissance tool for discovering devices on a local network, identifying MAC addresses, detecting vendors and scanning common open ports.
 
-This project was built as a hands-on learning exercise in networking, cybersecurity, Python scripting, and CLI tool development.
+### Features
 
----
-
-## Features
-
-- Automatic network interface detection
-- IPv4 address and network calculation
-- Multithreaded host discovery
-- Hostname resolution
+- Network interface detection
+- Host discovery
 - MAC address detection
-- Vendor identification based on MAC prefix
+- Vendor identification
+- Hostname resolution
 - Common port scanning
-- JSON export of scan results
+- JSON export
 - Interactive CLI menu
-- Command-line argument support
-
+- Command line arguments
 ---
 
 ## Technologies Used
