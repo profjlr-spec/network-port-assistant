@@ -1,5 +1,8 @@
 ip,hostname,mac,vendor,os,open_ports
-10.0.0.1,_gateway,F8:79:0A:25:55:9E,Router / Network Device,Linux / Router,"53 domain, 80 http, 443 https"
+10.0.0.1,_gateway,F8:79:0A:25:55:9E,Router / Network Device,Linux / Router,53 domain; 80 http; 443 https
+10.0.0.66,Unknown,FE:83:4B:CF:AD:B8,Private / Randomized MAC,Linux / Router,
+10.0.0.103,Unknown,7A:7A:12:F7:4D:F5,Private / Randomized MAC,Linux / Router,
+10.0.0.175,Unknown,14:EA:63:E0:BA:B6,Private / Consumer Device,Linux / Router,443 https
 10.0.0.220,Unknown,7C:27:BC:E4:77:4E,Apple,Linux / Router,
 10.0.0.221,Friday,80:91:33:55:B5:79,Local Interface,Linux / Router,
-10.0.0.222,Unknown,76:63:AB:0E:F6:BC,Unknown Vendor,Linux / Router,
+10.0.0.222,Unknown,76:63:AB:0E:F6:BC,Private / Randomized MAC,Linux / Router,

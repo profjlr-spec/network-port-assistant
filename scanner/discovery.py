@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 OUI_VENDORS = {
     "F8:79:0A": "Router / Network Device",
     "7C:27:BC": "Apple",
-    "7A:7A:12": "Unknown / Private MAC",
+    "14:EA:63": "Private / Consumer Device",
 }
 
 
@@ -29,17 +29,24 @@ def discover_hosts(network):
     print(f"\nScanning network: {network}\n")
 
     net = ipaddress.IPv4Network(network)
+    all_hosts = list(net.hosts())
+    total_hosts = len(all_hosts)
     hosts = []
+    checked = 0
 
     with ThreadPoolExecutor(max_workers=50) as executor:
-        futures = [executor.submit(ping_host, str(host)) for host in net.hosts()]
+        futures = [executor.submit(ping_host, str(host)) for host in all_hosts]
 
         for future in as_completed(futures):
+            checked += 1
+            print(f"Progress: {checked}/{total_hosts} hosts checked", end="\r")
+
             result = future.result()
             if result:
-                print(f"Host active: {result}")
+                print(f"\nHost active: {result}")
                 hosts.append(result)
 
+    print()
     hosts.sort(key=lambda ip: ipaddress.IPv4Address(ip))
     return hosts
 
@@ -66,12 +73,23 @@ def get_mac(ip):
     return "Unknown"
 
 
+def is_locally_administered_mac(mac):
+    try:
+        first_octet = int(mac.split(":")[0], 16)
+        return bool(first_octet & 2)
+    except Exception:
+        return False
+
+
 def get_vendor(mac, local_mac):
     if mac == "Unknown":
         return "Unknown"
 
     if mac.upper() == local_mac.upper():
         return "Local Interface"
+
+    if is_locally_administered_mac(mac):
+        return "Private / Randomized MAC"
 
     prefix = mac.upper()[0:8]
     return OUI_VENDORS.get(prefix, "Unknown Vendor")

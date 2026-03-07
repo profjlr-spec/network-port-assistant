@@ -8,7 +8,7 @@ from scanner.discovery import (
     get_vendor,
 )
 from scanner.interfaces import choose_interface, get_interface_info
-from scanner.ports import get_service, scan_ports
+from scanner.ports import get_ports_to_scan, get_service, scan_ports
 from scanner.utils import interactive_menu, save_results
 
 
@@ -18,6 +18,16 @@ def parse_args():
     parser.add_argument("--scan", action="store_true")
     parser.add_argument("--ports", action="store_true")
     parser.add_argument("--save", action="store_true")
+    parser.add_argument(
+        "--top-ports",
+        action="store_true",
+        help="Scan a predefined list of common ports"
+    )
+    parser.add_argument(
+        "--port-range",
+        type=str,
+        help="Scan a custom port range, for example 1-1024"
+    )
 
     return parser.parse_args()
 
@@ -59,6 +69,19 @@ def main():
 
     print("\nDiscovered Hosts:\n")
 
+    ports_to_scan = []
+    if ports:
+        try:
+            ports_to_scan = get_ports_to_scan(
+                use_top_ports=args.top_ports,
+                port_range=args.port_range
+            )
+        except ValueError as error:
+            print(f"Error: {error}")
+            return
+
+        print(f"Ports selected for scanning: {len(ports_to_scan)} ports")
+
     for host in hosts:
         hostname = get_hostname(host)
 
@@ -80,7 +103,7 @@ def main():
         port_data = []
 
         if ports:
-            open_ports = scan_ports(host)
+            open_ports = scan_ports(host, ports_to_scan)
 
             if open_ports:
                 print("Open Ports:")

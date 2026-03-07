@@ -42,7 +42,7 @@ def save_json_results(interface_info, hosts):
 
 
 def save_csv_results(hosts):
-    with open("scan_results.csv", "w", newline="") as file:
+    with open("scan_results.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
 
         writer.writerow([
@@ -55,17 +55,17 @@ def save_csv_results(hosts):
         ])
 
         for host in hosts:
-            open_ports = ", ".join(
+            open_ports = "; ".join(
                 f"{port_info['port']} {port_info['service']}"
                 for port_info in host["ports"]
             )
 
             writer.writerow([
-                host["ip"],
-                host["hostname"],
-                host["mac"],
-                host["vendor"],
-                host["os"],
+                str(host.get("ip", "")),
+                str(host.get("hostname", "")),
+                str(host.get("mac", "")),
+                str(host.get("vendor", "")),
+                str(host.get("os", "")),
                 open_ports
             ])
 
