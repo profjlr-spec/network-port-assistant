@@ -1,35 +1,30 @@
-## Network Port Assistant
+# Network Port Assistant
 
-Python network reconnaissance tool for discovering devices on a local network, identifying MAC addresses, detecting vendors and scanning common open ports.
+Network Port Assistant is a Python-based network reconnaissance tool designed to discover devices on a local network and identify basic service information.
 
-### Features
+The tool performs host discovery, MAC address detection, vendor identification, operating system guessing, port scanning, and basic service banner grabbing.
 
-- Network interface detection
-- Host discovery
-- MAC address detection
-- Vendor identification
+This project was built as a learning tool for networking, cybersecurity, and Python development.
+
+---
+
+# Features
+
+- Automatic network interface detection
+- IPv4 network calculation
+- Multithreaded host discovery
 - Hostname resolution
+- MAC address detection
+- Vendor identification (MAC OUI)
+- Basic OS detection (TTL based)
 - Common port scanning
-- JSON export
+- Service banner grabbing
+- CSV and JSON export
 - Interactive CLI menu
-- Command line arguments
----
-
-## Technologies Used
-
-- Python 3
-- netifaces
-- socket
-- ipaddress
-- argparse
-- ThreadPoolExecutor
+- Command line argument support
+- Scan progress indicators
+- Scan summary output
 
 ---
 
-## Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/profjlr-spec/network-port-assistant.git
-cd network-port-assistant
+# Example Output
