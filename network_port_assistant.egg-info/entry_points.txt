@@ -1,0 +1,2 @@
+[console_scripts]
+network-scan = network_scan:main

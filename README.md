@@ -27,4 +27,10 @@ This project was built as a learning tool for networking, cybersecurity, and Pyt
 
 ---
 
-# Example Output
+# Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/profjlr-spec/network-port-assistant.git
+cd network-port-assistant

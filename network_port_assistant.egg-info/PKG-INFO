@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: network-port-assistant
+Version: 1.0.0
+Summary: Python network reconnaissance tool for host discovery, MAC detection, vendor lookup, port scanning, and banner grabbing
+Author: profjlr-spec
+License-File: LICENSE
+Requires-Dist: netifaces
+Dynamic: author
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
