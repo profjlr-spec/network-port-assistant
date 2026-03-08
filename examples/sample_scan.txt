@@ -1,0 +1,12 @@
+Example Scan Output
+
+Host     : 10.0.0.1
+Hostname : _gateway
+MAC      : F8:79:0A:25:55:9E
+Vendor   : Router / Network Device
+OS       : Linux / Router
+
+Open Ports:
+  - 53    domain
+  - 80    http (HTTP/1.1 200 OK)
+  - 443   https (HTTP/1.1 200 OK)

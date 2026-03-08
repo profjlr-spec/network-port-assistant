@@ -1,5 +1,9 @@
 # Network Port Assistant
 
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
+
 Network Port Assistant is a Python-based network reconnaissance tool designed to discover devices on a local network and identify basic service information.
 
 The tool performs host discovery, MAC address detection, vendor identification, operating system guessing, port scanning, and basic service banner grabbing.
