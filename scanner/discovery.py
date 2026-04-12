@@ -138,11 +138,10 @@ def get_vendor(mac, local_mac):
         return "Local Interface"
 
     if is_locally_administered_mac(mac):
-        return "Private / Randomized MAC"
+        return "Private / Randomized MAC (Vendor Hidden)"
 
     prefix = mac[0:8]
     return OUI_VENDORS.get(prefix, "Unknown Vendor")
-
 
 # ==============================
 # OS guess helpers
