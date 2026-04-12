@@ -8,8 +8,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ==============================
 # Local OUI vendor hints
 # ==============================
-# This is a lightweight local mapping for common vendors.
-# It is not a complete OUI database.
+# Lightweight local mapping for common vendors.
+# This is not a complete OUI database.
 OUI_VENDORS = {
     "00:1A:2B": "Cisco",
     "00:1B:63": "Apple",
@@ -32,8 +32,8 @@ OUI_VENDORS = {
     "88:66:A5": "Apple",
     "A4:5E:60": "Apple",
     "B8:17:C2": "Apple",
-    "DC:A6:32": "Raspberry Pi / Sony UK",
     "B8:27:EB": "Raspberry Pi",
+    "DC:A6:32": "Raspberry Pi / Sony UK",
     "D8:3A:DD": "Raspberry Pi",
     "E4:5F:01": "Raspberry Pi",
     "2C:CF:67": "Espressif / IoT Device",
@@ -142,6 +142,43 @@ def get_vendor(mac, local_mac):
 
     prefix = mac[0:8]
     return OUI_VENDORS.get(prefix, "Unknown Vendor")
+
+
+def get_device_hint(ip, hostname, mac, vendor, local_ip, local_mac):
+    ip = str(ip)
+    hostname = str(hostname).lower()
+    mac = str(mac).upper()
+    vendor = str(vendor)
+
+    if ip == local_ip or mac == local_mac.upper():
+        return "Local Host"
+
+    if hostname == "_gateway" or ip.endswith(".1"):
+        return "Router / Gateway"
+
+    if "raspberry" in vendor.lower():
+        return "Raspberry Pi"
+
+    if "vmware" in vendor.lower() or "virtualbox" in vendor.lower() or "qemu" in vendor.lower():
+        return "Virtual Machine"
+
+    if "apple" in vendor.lower():
+        return "Apple Device"
+
+    if "espressif" in vendor.lower() or "iot" in vendor.lower():
+        return "IoT Device"
+
+    if "smart device" in vendor.lower():
+        return "Consumer Smart Device"
+
+    if "private / randomized mac" in vendor.lower():
+        return "Mobile / Privacy MAC"
+
+    if "router / network device" in vendor.lower():
+        return "Network Device"
+
+    return "Unknown Device Type"
+
 
 # ==============================
 # OS guess helpers
