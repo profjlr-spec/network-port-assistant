@@ -148,7 +148,7 @@ def get_device_hint(ip, hostname, mac, vendor, local_ip, local_mac):
     ip = str(ip)
     hostname = str(hostname).lower()
     mac = str(mac).upper()
-    vendor = str(vendor)
+    vendor = str(vendor).lower()
 
     if ip == local_ip or mac == local_mac.upper():
         return "Local Host"
@@ -156,26 +156,26 @@ def get_device_hint(ip, hostname, mac, vendor, local_ip, local_mac):
     if hostname == "_gateway" or ip.endswith(".1"):
         return "Router / Gateway"
 
-    if "raspberry" in vendor.lower():
-        return "Raspberry Pi"
-
-    if "vmware" in vendor.lower() or "virtualbox" in vendor.lower() or "qemu" in vendor.lower():
-        return "Virtual Machine"
-
-    if "apple" in vendor.lower():
-        return "Apple Device"
-
-    if "espressif" in vendor.lower() or "iot" in vendor.lower():
-        return "IoT Device"
-
-    if "smart device" in vendor.lower():
-        return "Consumer Smart Device"
-
-    if "private / randomized mac" in vendor.lower():
+    if "private / randomized mac" in vendor:
         return "Mobile / Privacy MAC"
 
-    if "router / network device" in vendor.lower():
+    if "raspberry" in vendor:
+        return "Raspberry Pi"
+
+    if "vmware" in vendor or "virtualbox" in vendor or "qemu" in vendor or "kvm" in vendor:
+        return "Virtual Machine"
+
+    if "apple" in vendor:
+        return "Apple Device"
+
+    if "espressif" in vendor or "iot" in vendor:
+        return "IoT Device"
+
+    if "router / network device" in vendor:
         return "Network Device"
+
+    if "smart device" in vendor:
+        return "Consumer Smart Device"
 
     return "Unknown Device Type"
 
