@@ -1,4 +1,5 @@
 import argparse
+from datetime import datetime
 
 from scanner.discovery import (
     detect_os,
@@ -12,6 +13,9 @@ from scanner.ports import grab_banner, get_ports_to_scan, get_service, scan_port
 from scanner.utils import interactive_menu, save_results
 
 
+# ==============================
+# Argument parsing
+# ==============================
 def parse_args():
     parser = argparse.ArgumentParser()
 
@@ -32,21 +36,42 @@ def parse_args():
     return parser.parse_args()
 
 
+# ==============================
+# Print helpers
+# ==============================
 def print_host_separator():
     print("=" * 40)
 
 
-def print_summary(total_hosts, hosts_with_open_ports, save_enabled):
+def print_summary(
+    interface_info,
+    total_hosts,
+    hosts_with_open_ports,
+    total_open_ports,
+    save_enabled,
+    start_time
+):
+    duration_seconds = (datetime.now() - start_time).total_seconds()
+
     print("\nScan Summary")
     print("-" * 20)
+    print(f"Interface               : {interface_info['interface']}")
+    print(f"Network scanned         : {interface_info['network']}")
     print(f"Active hosts found      : {total_hosts}")
     print(f"Hosts with open ports   : {hosts_with_open_ports}")
+    print(f"Total open ports found  : {total_open_ports}")
+    print(f"Scan duration (seconds) : {duration_seconds:.2f}")
 
     if save_enabled:
-        print("Results saved           : scan_results.json, scan_results.csv")
+        print("Results saved           : output/scan_results_<timestamp>.json")
+        print("                          output/scan_results_<timestamp>.csv")
 
 
+# ==============================
+# Main program
+# ==============================
 def main():
+    start_time = datetime.now()
     args = parse_args()
 
     if not args.scan and not args.ports and not args.save:
@@ -77,6 +102,7 @@ def main():
 
     results = []
     hosts_with_open_ports = 0
+    total_open_ports = 0
 
     print("\nDiscovered Hosts:\n")
 
@@ -119,6 +145,8 @@ def main():
             print("Open Ports:")
             if open_ports:
                 hosts_with_open_ports += 1
+                total_open_ports += len(open_ports)
+
                 for port in open_ports:
                     service = get_service(port)
                     banner = grab_banner(host, port)
@@ -153,9 +181,12 @@ def main():
         save_results(interface_info, results)
 
     print_summary(
+        interface_info=interface_info,
         total_hosts=len(hosts),
         hosts_with_open_ports=hosts_with_open_ports,
-        save_enabled=save
+        total_open_ports=total_open_ports,
+        save_enabled=save,
+        start_time=start_time
     )
 
 
