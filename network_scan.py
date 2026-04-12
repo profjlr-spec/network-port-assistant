@@ -4,6 +4,7 @@ from datetime import datetime
 from scanner.discovery import (
     detect_os,
     discover_hosts,
+    get_device_hint,
     get_hostname,
     get_mac,
     get_vendor,
@@ -42,6 +43,7 @@ def parse_args():
 def print_host_separator():
     print("=" * 40)
 
+
 def print_summary(
     interface_info,
     total_hosts,
@@ -66,6 +68,7 @@ def print_summary(
         json_file, csv_file = saved_files
         print(f"Results saved           : {json_file}")
         print(f"                          {csv_file}")
+
 
 # ==============================
 # Main program
@@ -103,6 +106,7 @@ def main():
     results = []
     hosts_with_open_ports = 0
     total_open_ports = 0
+    saved_files = None
 
     print("\nDiscovered Hosts:\n")
 
@@ -128,6 +132,14 @@ def main():
             mac = get_mac(host)
 
         vendor = get_vendor(mac, interface_info["mac_address"])
+        device_hint = get_device_hint(
+            ip=host,
+            hostname=hostname,
+            mac=mac,
+            vendor=vendor,
+            local_ip=interface_info["ip_address"],
+            local_mac=interface_info["mac_address"]
+        )
         os_guess = detect_os(host)
 
         print_host_separator()
@@ -135,6 +147,7 @@ def main():
         print(f"Hostname : {hostname}")
         print(f"MAC      : {mac}")
         print(f"Vendor   : {vendor}")
+        print(f"Hint     : {device_hint}")
         print(f"OS       : {os_guess}")
 
         port_data = []
@@ -172,10 +185,11 @@ def main():
             "hostname": hostname,
             "mac": mac,
             "vendor": vendor,
+            "device_hint": device_hint,
             "os": os_guess,
             "ports": port_data
         })
-    saved_files = None
+
     if save:
         print("Saving results...\n")
         saved_files = save_results(interface_info, results)
@@ -189,6 +203,7 @@ def main():
         start_time=start_time,
         saved_files=saved_files
     )
+
 
 if __name__ == "__main__":
     main()
