@@ -54,6 +54,8 @@ def save_results(interface_info, hosts):
     save_json_results(interface_info, hosts, scan_time, json_file)
     save_csv_results(interface_info, hosts, scan_time, csv_file)
 
+    return json_file, csv_file
+
 
 def save_json_results(interface_info, hosts, scan_time, json_file):
     data = {

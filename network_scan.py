@@ -42,14 +42,14 @@ def parse_args():
 def print_host_separator():
     print("=" * 40)
 
-
 def print_summary(
     interface_info,
     total_hosts,
     hosts_with_open_ports,
     total_open_ports,
     save_enabled,
-    start_time
+    start_time,
+    saved_files=None
 ):
     duration_seconds = (datetime.now() - start_time).total_seconds()
 
@@ -62,10 +62,10 @@ def print_summary(
     print(f"Total open ports found  : {total_open_ports}")
     print(f"Scan duration (seconds) : {duration_seconds:.2f}")
 
-    if save_enabled:
-        print("Results saved           : output/scan_results_<timestamp>.json")
-        print("                          output/scan_results_<timestamp>.csv")
-
+    if save_enabled and saved_files:
+        json_file, csv_file = saved_files
+        print(f"Results saved           : {json_file}")
+        print(f"                          {csv_file}")
 
 # ==============================
 # Main program
@@ -175,10 +175,10 @@ def main():
             "os": os_guess,
             "ports": port_data
         })
-
+    saved_files = None
     if save:
         print("Saving results...\n")
-        save_results(interface_info, results)
+        saved_files = save_results(interface_info, results)
 
     print_summary(
         interface_info=interface_info,
@@ -186,9 +186,9 @@ def main():
         hosts_with_open_ports=hosts_with_open_ports,
         total_open_ports=total_open_ports,
         save_enabled=save,
-        start_time=start_time
+        start_time=start_time,
+        saved_files=saved_files
     )
-
 
 if __name__ == "__main__":
     main()
