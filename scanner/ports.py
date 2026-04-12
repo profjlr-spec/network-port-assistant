@@ -3,8 +3,11 @@ import ssl
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
-TOP_PORTS = [22, 53, 80, 139, 443, 445, 3389]
-
+TOP_PORTS = [
+    21, 22, 23, 25, 53, 80, 110, 123, 135, 139,
+    143, 161, 389, 443, 445, 587, 636, 3306, 3389,
+    5432, 5900, 8080, 8443
+]
 
 def scan_port(ip, port):
     try:
