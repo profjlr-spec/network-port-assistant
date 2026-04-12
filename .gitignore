@@ -2,7 +2,9 @@ venv/
 __pycache__/
 *.pyc
 output/
+build/
+dist/
+*.egg-info/
 *_backup.py
 scan_results.csv
 scan_results.json
-*.egg-info/
