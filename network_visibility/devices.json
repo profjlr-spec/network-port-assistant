@@ -1,0 +1,210 @@
+[
+    {
+        "target": "MyQ-332.attlocal.net (192.168.1.65)",
+        "ip": "192.168.1.65",
+        "mac": "CC:6A:10:2E:81:B1",
+        "vendor": "The Chamberlain Group",
+        "status": "NEW",
+        "last_seen": "2026-05-21T20:19:37.528381"
+    },
+    {
+        "target": "My-ecobee (192.168.1.66)",
+        "ip": "192.168.1.66",
+        "mac": "44:61:32:38:51:28",
+        "vendor": "ecobee",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528449"
+    },
+    {
+        "target": "Alarm.com (192.168.1.67)",
+        "ip": "192.168.1.67",
+        "mac": "B8:3A:9D:44:C8:F2",
+        "vendor": "Alarm.com",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528466"
+    },
+    {
+        "target": "192.168.1.68",
+        "ip": "192.168.1.68",
+        "mac": "D4:9C:DD:3C:15:92",
+        "vendor": "Ampak Technology",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528479"
+    },
+    {
+        "target": "192.168.1.72",
+        "ip": "192.168.1.72",
+        "mac": "B8:3A:9D:16:F2:6F",
+        "vendor": "Alarm.com",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528490"
+    },
+    {
+        "target": "192.168.1.73",
+        "ip": "192.168.1.73",
+        "mac": "B8:3A:9D:18:B0:9A",
+        "vendor": "Alarm.com",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528509"
+    },
+    {
+        "target": "LAPTOP-ODC04TF8.attlocal.net (192.168.1.74)",
+        "ip": "192.168.1.74",
+        "mac": "D8:12:65:D8:7C:5B",
+        "vendor": "Chongqing Fugui Electronics",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528519"
+    },
+    {
+        "target": "192.168.1.86",
+        "ip": "192.168.1.86",
+        "mac": "70:70:AA:D7:E4:8E",
+        "vendor": "Amazon Technologies",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528531"
+    },
+    {
+        "target": "none.attlocal.net (192.168.1.87)",
+        "ip": "192.168.1.87",
+        "mac": "08:6A:E5:03:69:9B",
+        "vendor": "Amazon Technologies",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528541"
+    },
+    {
+        "target": "192.168.1.88",
+        "ip": "192.168.1.88",
+        "mac": "80:0C:F9:A4:A7:F9",
+        "vendor": "Amazon Technologies",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528551"
+    },
+    {
+        "target": "192.168.1.90",
+        "ip": "192.168.1.90",
+        "mac": "24:FC:E5:9A:8C:24",
+        "vendor": "Samsung Electronics",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528561"
+    },
+    {
+        "target": "192.168.1.116",
+        "ip": "192.168.1.116",
+        "mac": "C0:95:CF:59:FC:40",
+        "vendor": "Unknown",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528570"
+    },
+    {
+        "target": "192.168.1.136",
+        "ip": "192.168.1.136",
+        "mac": "CC:D2:81:6A:80:BE",
+        "vendor": "Apple",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528580"
+    },
+    {
+        "target": "ecb5faa0f306 (192.168.1.140)",
+        "ip": "192.168.1.140",
+        "mac": "EC:B5:FA:A0:F3:06",
+        "vendor": "Philips Lighting BV",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528595"
+    },
+    {
+        "target": "192.168.1.145",
+        "ip": "192.168.1.145",
+        "mac": "CC:D2:81:6A:80:BE",
+        "vendor": "Apple",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528606"
+    },
+    {
+        "target": "192.168.1.153",
+        "ip": "192.168.1.153",
+        "mac": "CC:D2:81:6A:80:BE",
+        "vendor": "Apple",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528616"
+    },
+    {
+        "target": "none-2.attlocal.net (192.168.1.161)",
+        "ip": "192.168.1.161",
+        "mac": "58:E4:88:89:B4:88",
+        "vendor": "Amazon Technologies",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528626"
+    },
+    {
+        "target": "connect (192.168.1.168)",
+        "ip": "192.168.1.168",
+        "mac": "B8:B7:F1:F5:79:07",
+        "vendor": "Wistron Neweb",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528637"
+    },
+    {
+        "target": "192.168.1.187",
+        "ip": "192.168.1.187",
+        "mac": "3C:31:78:98:B4:FF",
+        "vendor": "Qolsys",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528647"
+    },
+    {
+        "target": "192.168.1.231",
+        "ip": "192.168.1.231",
+        "mac": "94:BD:BE:29:44:4B",
+        "vendor": "TPV Display Technology (Xiamen",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528657"
+    },
+    {
+        "target": "192.168.1.234",
+        "ip": "192.168.1.234",
+        "mac": "D8:E7:43:20:71:C3",
+        "vendor": "Wush",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528667"
+    },
+    {
+        "target": "192.168.1.249",
+        "ip": "192.168.1.249",
+        "mac": "F0:2F:9E:EF:A4:C6",
+        "vendor": "Amazon Technologies",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528676"
+    },
+    {
+        "target": "192.168.1.252",
+        "ip": "192.168.1.252",
+        "mac": "A0:92:08:E9:69:89",
+        "vendor": "Tuya Smart",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528686"
+    },
+    {
+        "target": "dsldevice (192.168.1.254)",
+        "ip": "192.168.1.254",
+        "mac": "6C:4B:B4:90:BD:01",
+        "vendor": "Humax",
+        "status": "KNOWN",
+        "last_seen": "2026-05-21T20:19:37.528695"
+    },
+    {
+        "target": "raspberrypi.attlocal.net (192.168.1.129)",
+        "ip": "192.168.1.129",
+        "mac": null,
+        "vendor": null,
+        "status": "NO MAC",
+        "last_seen": "2026-05-21T20:19:37.528705"
+    },
+    {
+        "target": "raspberrypi (192.168.1.253)",
+        "ip": "192.168.1.253",
+        "mac": null,
+        "vendor": null,
+        "status": "NO MAC",
+        "last_seen": "2026-05-21T20:19:37.528714"
+    }
+]
